@@ -1,5 +1,5 @@
 export default function createCharacterCard(props) {
-  const { image, name, status, type, species } = props;
+  const { image, name, status, episode, species } = props;
 
   const characterCard = document.createElement("li");
   characterCard.classList.add("card");
@@ -17,8 +17,8 @@ export default function createCharacterCard(props) {
         <dl class="card__info">
           <dt class="card__info-title">Status:</dt>
           <dd class="card__info-description">${status}</dd>
-          <dt class="card__info-title">Type:</dt>
-          <dd class="card__info-description">${type}</dd>
+          <dt class="card__info-title">Occurrences:</dt>
+          <dd class="card__info-description">${episode.length}</dd>
           <dt class="card__info-title">Species</dt>
           <dd class="card__info-description">${species}</dd>
         </dl>

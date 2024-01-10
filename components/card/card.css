@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Fjalla One";
-  src: url(/assets/Fjalla_One/FjallaOne-Regular.ttf) format("truetype");
+  src: url(../../assets/Fjalla_One/FjallaOne-Regular.ttf) format("truetype");
 }
 
 .card-container {
