@@ -9,7 +9,7 @@
   grid-template-columns: 1fr 24px;
   margin-bottom: 20px;
   border-radius: 50px;
-  box-shadow: 0px 2px 5px 0px rgba(74, 184, 23, 0);
+  box-shadow: 0px 2px 10px 0px rgba(74, 184, 23, 0.185);
 }
 
 .search-bar__input {
