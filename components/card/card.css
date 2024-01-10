@@ -36,3 +36,10 @@ li {
   border-radius: 30px;
   box-shadow: 0px 20px 30px 0px rgba(74, 184, 23, 0.28);
 }
+
+.card__title {
+  color: #4ab817;
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+}
