@@ -30,3 +30,7 @@ main {
 .title {
   padding: 10px 0;
 }
+
+.title__image {
+  padding: 20px;
+}
