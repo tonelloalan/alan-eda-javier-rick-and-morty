@@ -11,11 +11,14 @@
 
 .card-container {
   margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
-  width: 300px;
-  /* background-color: var(--color-secondary); */
+  width: 100%;
+  max-width: 400px;
   background-color: none;
 }
 
@@ -51,7 +54,7 @@ li {
 
 .card__title {
   color: #4ab817;
-  font-size: xxx-large;
+  font-size: xx-large;
   font-weight: bolder;
   text-align: center;
 }
