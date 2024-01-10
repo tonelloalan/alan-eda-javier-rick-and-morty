@@ -12,6 +12,7 @@
 .card-container {
   margin-bottom: 10px;
 }
+
 .card {
   width: 300px;
   /* background-color: var(--color-secondary); */
@@ -25,7 +26,8 @@
 .card__content {
   padding: 10px 20px 20px;
   display: grid;
-  gap: 20px;
+  gap: 5px;
+  margin-bottom: 40px;
 }
 
 .card__info-description {
@@ -39,7 +41,6 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
 }
 
 .card__image {
