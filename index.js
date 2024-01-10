@@ -73,15 +73,27 @@ function checkDocument() {
   page <= 1 ? (prevButton.disabled = true) : (prevButton.disabled = false);
 }
 
-// Whhen the content is loaded, let validate in which page we are.
-document.addEventListener("DOMContentLoaded", checkDocument);
+// // Whhen the content is loaded, let validate in which page we are.
+// document.addEventListener("DOMContentLoaded", checkDocument);
 
-fetchCharacters();
+// fetchCharacters();
 
-searchBar.addEventListener("submit", function (event) {
-  event.preventDefault();
+// searchBar.addEventListener("submit", function (event) {
+//   event.preventDefault();
 
-  //Getting the value of the input inside the searchbar.
-  const form = new FormData(event.target);
-  const formData = Object.fromEntries(form);
+//   //Getting the value of the input inside the searchbar.
+//   const form = new FormData(event.target);
+//   const formData = Object.fromEntries(form);
+// });
+
+// possbile implementation
+document.addEventListener("DOMContentLoaded", () => {
+  checkDocument();
+  fetchCharacters();
+});
+
+document.addEventListener("search", (event) => {
+  searchQuery = event.detail.query;
+  page = 1; // Reset page to 1 when performing a new search
+  fetchCharacters();
 });
