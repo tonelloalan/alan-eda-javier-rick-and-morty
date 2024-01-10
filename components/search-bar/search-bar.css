@@ -1,5 +1,7 @@
 .search-bar-container {
-  width: 300px;
+  width: 80vw;
+  max-width: 400px;
+  margin: auto;
 }
 
 .search-bar {
@@ -7,6 +9,9 @@
   background-color: var(--color-secondary);
   display: grid;
   grid-template-columns: 1fr 24px;
+  margin-bottom: 20px;
+  border-radius: 50px;
+  box-shadow: 0px 2px 10px 0px rgba(74, 184, 23, 0.185);
 }
 
 .search-bar__input {

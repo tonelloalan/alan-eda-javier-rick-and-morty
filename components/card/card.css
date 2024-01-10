@@ -3,13 +3,23 @@
   src: url(../../assets/Fjalla_One/FjallaOne-Regular.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "Unbounded";
+  src: url(../../assets/Unbounded/Unbounded-VariableFont_wght.ttf)
+    format("truetype");
+}
+
 .card-container {
   margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
 .card {
-  width: 300px;
-  /* background-color: var(--color-secondary); */
-  background-color: transparent;
+  width: 100%;
+  max-width: 400px;
+  background-color: none;
 }
 
 .card__info {
@@ -19,7 +29,8 @@
 .card__content {
   padding: 10px 20px 20px;
   display: grid;
-  gap: 20px;
+  gap: 5px;
+  margin-bottom: 40px;
 }
 
 .card__info-description {
@@ -33,7 +44,6 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
 }
 
 .card__image {
@@ -44,8 +54,7 @@ li {
 
 .card__title {
   color: #4ab817;
-  font-size: xxx-large;
+  font-size: xx-large;
   font-weight: bolder;
   text-align: center;
-  font-family: Fjalla One;
 }
