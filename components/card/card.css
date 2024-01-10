@@ -3,6 +3,12 @@
   src: url(../../assets/Fjalla_One/FjallaOne-Regular.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "Unbounded";
+  src: url(../../assets/Unbounded/Unbounded-VariableFont_wght.ttf)
+    format("truetype");
+}
+
 .card-container {
   margin-bottom: 10px;
 }
@@ -47,5 +53,5 @@ li {
   font-size: xxx-large;
   font-weight: bolder;
   text-align: center;
-  font-family: Fjalla One;
+  font-family: Unbounded;
 }
