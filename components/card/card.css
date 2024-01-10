@@ -9,7 +9,7 @@
 .card {
   width: 300px;
   /* background-color: var(--color-secondary); */
-  background-color: none;
+  background-color: transparent;
 }
 
 .card__info {
