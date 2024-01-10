@@ -12,3 +12,27 @@ const pagination = document.querySelector('[data-js="pagination"]');
 const maxPage = 1;
 const page = 1;
 const searchQuery = "";
+
+// fetch data from API
+try {
+  fetch("https://rickandmortyapi.com/api")
+    .then((response) => response.json())
+    .then((data) => {
+      // process the data and update the html
+
+      data.results.forEarch((character) => {
+        // create html elements or update existing ones with character information
+        const characterCard = document.createElement("div");
+        characterCard.innerHTML = `
+  <img src="${character.image}" alt="${character.name}">
+        <h3>${character.name}</h3>
+        <p>Status: ${character.status}</p>
+        <p>Type: ${character.type}</p>
+        <p>Type: ${character.occurences}</p>
+  `;
+        cardContainer.appendChild(characterCard);
+      });
+    });
+} catch {
+  (error) => console.error("Error fetching data:", error);
+}
