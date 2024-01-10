@@ -1,3 +1,5 @@
+import createCharacterCard from "./components/card/card.js";
+
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
@@ -9,30 +11,69 @@ const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
-const maxPage = 1;
-const page = 1;
+let maxPage = 1;
+let page = 1;
 const searchQuery = "";
-
 // fetch data from API
-try {
-  fetch("https://rickandmortyapi.com/api")
-    .then((response) => response.json())
-    .then((data) => {
-      // process the data and update the html
+const baseUrl = "https://rickandmortyapi.com/api";
 
-      data.results.forEarch((character) => {
-        // create html elements or update existing ones with character information
-        const characterCard = document.createElement("div");
-        characterCard.innerHTML = `
-  <img src="${character.image}" alt="${character.name}">
-        <h3>${character.name}</h3>
-        <p>Status: ${character.status}</p>
-        <p>Type: ${character.type}</p>
-        <p>Type: ${character.occurences}</p>
-  `;
+async function fetchCharacters(pageNumber = 1) {
+  cleanContainer();
+  checkDocument();
+
+  const charactersPath = "character";
+  const page = `?page=${pageNumber}`;
+
+  await fetch(`${baseUrl}/${charactersPath}/${page}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Update the States
+      maxPage = data.info.pages;
+      const arrayResults = data.results;
+      // loop into the results from the API
+      arrayResults.forEach((character) => {
+        const characterCard = createCharacterCard(character);
         cardContainer.appendChild(characterCard);
       });
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
     });
-} catch {
-  (error) => console.error("Error fetching data:", error);
 }
+// Trigger this function when the user click on "previous" button.
+prevButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (page > 1) {
+    page--;
+    fetchCharacters(page);
+  }
+});
+// Trigger this function when the user click on "next" button.
+nextButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (page < maxPage) {
+    page++;
+    fetchCharacters(page);
+  }
+});
+
+// Clean the card container <ul>
+function cleanContainer() {
+  cardContainer.innerHTML = "";
+}
+// Let's see if the page is 1 to disable the "previous" button otherwise enable it.
+function checkDocument() {
+  page <= 1 ? (prevButton.disabled = true) : (prevButton.disabled = false);
+}
+
+// Whhen the content is loaded, let validate in which page we are.
+document.addEventListener("DOMContentLoaded", checkDocument);
+
+fetchCharacters();
