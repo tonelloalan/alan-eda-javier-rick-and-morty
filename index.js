@@ -13,7 +13,7 @@ const pagination = document.querySelector('[data-js="pagination"]');
 // States
 let maxPage = 1;
 let page = 1;
-const searchQuery = "";
+let searchQuery = "";
 // fetch data from API
 const baseUrl = "https://rickandmortyapi.com/api";
 
@@ -77,3 +77,11 @@ function checkDocument() {
 document.addEventListener("DOMContentLoaded", checkDocument);
 
 fetchCharacters();
+
+searchBar.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  //Getting the value of the input inside the searchbar.
+  const form = new FormData(event.target);
+  const formData = Object.fromEntries(form);
+});
