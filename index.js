@@ -1,15 +1,23 @@
 import createCharacterCard from "./components/card/card.js";
 import errorComponent from "./components/error/error.js";
+import {
+  createNextButton,
+  createPreviousButton,
+} from "./components/nav-button/nav-button.js";
+import {
+  createSearchBar,
+  createForm,
+} from "./components/search-bar/search-bar.js";
+import { createPagination } from "./components/nav-pagination/nav-pagination.js";
 
-const cardContainer = document.querySelector('[data-js="card-container"]');
-const searchBarContainer = document.querySelector(
-  '[data-js="search-bar-container"]'
-);
-const searchBar = document.querySelector('[data-js="search-bar"]');
+const mainElement = document.getElementById("mainElement");
 const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
+const cardContainer = document.querySelector('[data-js="card-container"]');
+const searchBarContainer = createSearchBar();
+const searchBar = createForm();
+const prevButton = createPreviousButton();
+const nextButton = createNextButton();
+const pagination = createPagination();
 
 // States
 let maxPage = 1;
@@ -96,13 +104,15 @@ searchBar.addEventListener("submit", function (event) {
   page = 1;
   fetchCharacters(page, searchQuery);
 });
-
+// // Whhen the content is loaded, let validate in which page we are.
 document.addEventListener("DOMContentLoaded", () => {
   fetchCharacters();
+  mainElement.insertBefore(searchBarContainer, mainElement.firstChild);
+  searchBarContainer.append(searchBar);
+  navigation.append(prevButton);
+  navigation.append(pagination);
+  navigation.append(nextButton);
 });
-
-// // Whhen the content is loaded, let validate in which page we are.
-// document.addEventListener("DOMContentLoaded", checkDocument);
 
 // fetchCharacters();
 
