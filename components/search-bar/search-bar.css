@@ -1,17 +1,12 @@
 .search-bar-container {
-  width: 48px;
+  width: 70vw;
   max-width: 400px;
   margin: auto;
   position: sticky;
   top: 20px;
-  transition: all ease-in-out 0.7s;
 }
 
-.search-bar-container:hover {
-  width: 80vh;
-}
-
-.search-bar-container .search-bar {
+.search-bar {
   padding: 10px 20px;
   background-color: var(--color-secondary);
   display: grid;
@@ -26,12 +21,6 @@
   background-color: transparent;
   border: none;
   color: var(--color-primary);
-  opacity: 0;
-  transition: all ease-in-out 0.7s;
-}
-
-.search-bar__input:hover {
-  opacity: 100%;
 }
 
 .search-bar__button {
@@ -45,11 +34,7 @@
 
 .search-bar__icon {
   width: 20px;
-  transition: all ease-in-out 0.7s;
   position: absolute;
   right: 3vw;
   bottom: 3vh;
-}
-
-.search-bar__icon:hover {
 }
