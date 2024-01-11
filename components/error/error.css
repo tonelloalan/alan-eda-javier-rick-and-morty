@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Unbounded";
+  src: url(../../assets/Unbounded/Unbounded-VariableFont_wght.ttf)
+    format("truetype");
+}
+
+.error__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.error__title {
+  color: #4ab817;
+  font-size: xx-large;
+  font-weight: bolder;
+  text-align: center;
+  font-family: Unbounded;
+  margin-top: 100px;
+}
+
+/* .error__image {
+    align-items: center;
+} */
