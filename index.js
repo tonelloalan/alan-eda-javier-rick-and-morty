@@ -20,8 +20,6 @@ const baseUrl = "https://rickandmortyapi.com/api";
 
 async function fetchCharacters(pageNumber = 1, searchQuery = "") {
   cleanContainer();
-  checkDocument();
-
   const charactersPath = "character";
   let query = `?page=${pageNumber}`;
   if (searchQuery) {
@@ -32,13 +30,12 @@ async function fetchCharacters(pageNumber = 1, searchQuery = "") {
     // await fetch(`${baseUrl}/${charactersPath}/${page}`)
     .then((response) => {
       if (!response.ok) {
-        cleanContainer();
         checkDocument();
+        cleanContainer();
         const errorContainer = errorComponent();
         cardContainer.append(errorContainer);
         navigation.style.display = "none";
         pagination.textContent = `0/0`;
-        nextButton.disabled = true;
         throw new Error("Network response was not ok");
       }
       return response.json();
@@ -47,7 +44,8 @@ async function fetchCharacters(pageNumber = 1, searchQuery = "") {
       // Update the States
       maxPage = data.info.pages;
       const arrayResults = data.results;
-      pagination.textContent = `${page}/${data.info.pages}`;
+      pagination.textContent = `${page}/${maxPage}`;
+      checkDocument();
       // loop into the results from the API
       arrayResults.forEach((character) => {
         const characterCard = createCharacterCard(character);
@@ -86,10 +84,11 @@ function cleanContainer() {
 }
 // Let's see if the page is 1 to disable the "previous" button otherwise enable it.
 function checkDocument() {
-  nextButton.disabled = false;
   navigation.style.display = "grid";
   page <= 1 ? (prevButton.disabled = true) : (prevButton.disabled = false);
+  page < maxPage ? (nextButton.disabled = false) : (nextButton.disabled = true);
 }
+
 searchBar.addEventListener("submit", function (event) {
   event.preventDefault();
   const formData = new FormData(event.target);
@@ -97,9 +96,9 @@ searchBar.addEventListener("submit", function (event) {
   page = 1;
   fetchCharacters(page, searchQuery);
 });
+
 document.addEventListener("DOMContentLoaded", () => {
   fetchCharacters();
-  checkDocument();
 });
 
 // // Whhen the content is loaded, let validate in which page we are.
