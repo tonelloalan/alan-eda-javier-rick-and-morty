@@ -5,6 +5,8 @@
   border-radius: 20px;
   cursor: pointer;
   font-family: Fjalla One;
+  padding: 7px;
+  transition: background-color ease 0.3s;
 }
 
 .button:hover {
