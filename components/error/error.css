@@ -11,14 +11,22 @@
   align-items: center;
 }
 .error__title {
-  color: #4ab817;
-  font-size: xx-large;
+  color: #d63434;
+  font-size: large;
   font-weight: bolder;
   text-align: center;
   font-family: Unbounded;
   margin-top: 100px;
 }
+.error__content {
+  color: #4ab817;
+  font-size: xx-large;
+  font-weight: bolder;
+  text-align: center;
+  font-family: Unbounded;
+  margin-top: 0;
+}
 
-/* .error__image {
-    align-items: center;
-} */
+.error__image {
+  margin-top: -50px;
+}
