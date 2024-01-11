@@ -1,3 +1,4 @@
+// Import necessary functions and components
 import createCharacterCard from "./components/card/card.js";
 import errorComponent from "./components/error/error.js";
 import {
@@ -10,6 +11,7 @@ import {
 } from "./components/search-bar/search-bar.js";
 import { createPagination } from "./components/nav-pagination/nav-pagination.js";
 
+// Retrieve DOM elements
 const mainElement = document.getElementById("mainElement");
 const navigation = document.querySelector('[data-js="navigation"]');
 const cardContainer = document.querySelector('[data-js="card-container"]');
@@ -23,20 +25,23 @@ const pagination = createPagination();
 let maxPage = 1;
 let page = 1;
 let searchQuery = "";
-// fetch data from API
+
+// Base URL for the API
 const baseUrl = "https://rickandmortyapi.com/api";
 
+// Function to fetch characters from the API
 async function fetchCharacters(pageNumber = 1, searchQuery = "") {
+  // Clear the card container
   cleanContainer();
   const charactersPath = "character";
   let query = `?page=${pageNumber}`;
   if (searchQuery) {
     query += `&name=${encodeURIComponent(searchQuery)}`;
   }
-  // const page = `?page=${pageNumber}`;
+  // Fetch data from the API
   await fetch(`${baseUrl}/${charactersPath}/${query}`)
-    // await fetch(`${baseUrl}/${charactersPath}/${page}`)
     .then((response) => {
+      // Handle errors
       if (!response.ok) {
         checkDocument();
         cleanContainer();
@@ -54,58 +59,63 @@ async function fetchCharacters(pageNumber = 1, searchQuery = "") {
       const arrayResults = data.results;
       pagination.textContent = `${page}/${maxPage}`;
       checkDocument();
-      // loop into the results from the API
+      // Loop through the results from the API and create character cards
       arrayResults.forEach((character) => {
         const characterCard = createCharacterCard(character);
         cardContainer.appendChild(characterCard);
       });
 
-      // update the pagination display
+      // Update the pagination display
       pagination.innerHTML = `${pageNumber}/${maxPage}`;
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
 }
-// Trigger this function when the user click on "previous" button.
+// Event listener for "previous" button click
 prevButton.addEventListener("click", (e) => {
   e.preventDefault();
-
+  // Decrement page and fetch characters for the new page
   if (page > 1) {
     page--;
     fetchCharacters(page, searchQuery);
   }
 });
-// Trigger this function when the user click on "next" button.
+// Event listener for "next" button click
 nextButton.addEventListener("click", (e) => {
   e.preventDefault();
-
+  // Increment page and fetch characters for the new page
   if (page < maxPage) {
     page++;
     fetchCharacters(page, searchQuery);
   }
 });
 
-// Clean the card container <ul>
+// Function to clean the card container
 function cleanContainer() {
   cardContainer.innerHTML = "";
 }
-// Let's see if the page is 1 to disable the "previous" button otherwise enable it.
+// Function to check the document and update navigation display
 function checkDocument() {
+  // Display navigation grid and update button states based on current page
   navigation.style.display = "grid";
   page <= 1 ? (prevButton.disabled = true) : (prevButton.disabled = false);
   page < maxPage ? (nextButton.disabled = false) : (nextButton.disabled = true);
 }
 
+// Event listener for search form submission
 searchBar.addEventListener("submit", function (event) {
   event.preventDefault();
+  // Get search query from form, reset page, and fetch characters
   const formData = new FormData(event.target);
   searchQuery = formData.get("query"); // Assuming the input field has the name 'query'
   page = 1;
   fetchCharacters(page, searchQuery);
 });
-// // Whhen the content is loaded, let validate in which page we are.
+
+// Initial fetch on document load
 document.addEventListener("DOMContentLoaded", () => {
+  // Fetch characters, and set up UI components
   fetchCharacters();
   mainElement.insertBefore(searchBarContainer, mainElement.firstChild);
   searchBarContainer.append(searchBar);
@@ -113,10 +123,3 @@ document.addEventListener("DOMContentLoaded", () => {
   navigation.append(pagination);
   navigation.append(nextButton);
 });
-
-// fetchCharacters();
-
-//   //Getting the value of the input inside the searchbar.
-//   const form = new FormData(event.target);
-//   const formData = Object.fromEntries(form);
-// });
