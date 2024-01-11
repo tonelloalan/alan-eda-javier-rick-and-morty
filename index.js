@@ -40,6 +40,9 @@ async function fetchCharacters(pageNumber = 1) {
         const characterCard = createCharacterCard(character);
         cardContainer.appendChild(characterCard);
       });
+
+      // update the pagination display
+      pagination.innerHTML = `${pageNumber}/${maxPage}`;
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
