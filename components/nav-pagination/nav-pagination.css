@@ -15,8 +15,7 @@
   color: #666;
   position: sticky;
   bottom: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 20px 5px;
 }
 
 .navigation__pagination {
