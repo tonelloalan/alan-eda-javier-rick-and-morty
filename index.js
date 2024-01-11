@@ -17,14 +17,18 @@ let searchQuery = "";
 // fetch data from API
 const baseUrl = "https://rickandmortyapi.com/api";
 
-async function fetchCharacters(pageNumber = 1) {
+async function fetchCharacters(pageNumber = 1, searchQuery = "") {
   cleanContainer();
   checkDocument();
 
   const charactersPath = "character";
-  const page = `?page=${pageNumber}`;
+  // const page = `?page=${pageNumber}`;
+  let query = `?page=${pageNumber}`;
+  if (searchQuery) {
+    query += `&name=${encodeURIComponent(searchQuery)}`;
+  }
 
-  await fetch(`${baseUrl}/${charactersPath}/${page}`)
+  await fetch(`${baseUrl}/${charactersPath}/${page}/&name${searchQuery}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -35,6 +39,14 @@ async function fetchCharacters(pageNumber = 1) {
       // Update the States
       maxPage = data.info.pages;
       const arrayResults = data.results;
+
+      // Filter the results based on the search query
+      const filteredResults = searchQuery
+        ? arrayResults.filter((character) =>
+            character.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        : arrayResults;
+
       // loop into the results from the API
       arrayResults.forEach((character) => {
         const characterCard = createCharacterCard(character);
@@ -54,7 +66,7 @@ prevButton.addEventListener("click", (e) => {
 
   if (page > 1) {
     page--;
-    fetchCharacters(page);
+    fetchCharacters(page, searchQuery);
   }
 });
 // Trigger this function when the user click on "next" button.
@@ -63,7 +75,7 @@ nextButton.addEventListener("click", (e) => {
 
   if (page < maxPage) {
     page++;
-    fetchCharacters(page);
+    fetchCharacters(page, searchQuery);
   }
 });
 
@@ -76,9 +88,6 @@ function checkDocument() {
   page <= 1 ? (prevButton.disabled = true) : (prevButton.disabled = false);
 }
 
-// Whhen the content is loaded, let validate in which page we are.
-document.addEventListener("DOMContentLoaded", checkDocument);
-
 fetchCharacters();
 
 searchBar.addEventListener("submit", function (event) {
@@ -86,5 +95,14 @@ searchBar.addEventListener("submit", function (event) {
 
   //Getting the value of the input inside the searchbar.
   const form = new FormData(event.target);
-  const formData = Object.fromEntries(form);
+  // const formData = Object.fromEntries(form);
+  const formDataInput = formData.get("query"); // value of input
+  page = 1;
+  fetchCharacters(page, searchQuery);
+});
+
+// Whhen the content is loaded, let validate in which page we are.
+document.addEventListener("DOMContentLoaded", () => {
+  fetchCharacters();
+  checkDocument();
 });
