@@ -2,11 +2,12 @@ import createCharacterCard from "./components/card/card.js";
 import errorComponent from "./components/error/error.js";
 import createButton from "./components/nav-button/nav-button.js";
 import createPagination from "./components/nav-pagination/nav-pagination.js";
+import createSearchBar from "./components/search-bar/search-bar.js";
 
+const mainElement = document.getElementById("mainElement");
+// const newSearchBar = createSearchBar();
 const cardContainer = document.querySelector('[data-js="card-container"]');
-const searchBarContainer = document.querySelector(
-  '[data-js="search-bar-container"]'
-);
+const searchBarContainer = createSearchBar();
 const navButtons = createButton();
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
@@ -92,17 +93,18 @@ function checkDocument() {
   page < maxPage ? (nextButton.disabled = false) : (nextButton.disabled = true);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  fetchCharacters();
+  mainElement.insertBefore(searchBarContainer, mainElement.firstChild);
+  navigation.append(prevButton);
+  navigation.append(pagination);
+  navigation.append(nextButton);
+});
+
 searchBar.addEventListener("submit", function (event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   searchQuery = formData.get("query"); // Assuming the input field has the name 'query'
   page = 1;
   fetchCharacters(page, searchQuery);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetchCharacters();
-  navigation.append(prevButton);
-  navigation.append(pagination);
-  navigation.append(nextButton);
 });
