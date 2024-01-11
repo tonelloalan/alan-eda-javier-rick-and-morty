@@ -6,6 +6,7 @@
 .navigation {
   align-content: center;
   background-color: white;
+  border: solid rgba(0, 0, 0, 0.034) 1px;
   border-radius: 20px;
   box-shadow: 0px 2px 10px 0px rgba(74, 184, 23, 0.185);
   height: 30px;
