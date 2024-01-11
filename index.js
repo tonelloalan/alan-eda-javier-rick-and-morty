@@ -17,14 +17,18 @@ let searchQuery = "";
 // fetch data from API
 const baseUrl = "https://rickandmortyapi.com/api";
 
-async function fetchCharacters(pageNumber = 1) {
+async function fetchCharacters(pageNumber = 1, searchQuery = "") {
   cleanContainer();
   checkDocument();
 
   const charactersPath = "character";
-  const page = `?page=${pageNumber}`;
-
-  await fetch(`${baseUrl}/${charactersPath}/${page}`)
+  let query = `?page=${pageNumber}`;
+  if (searchQuery) {
+    query += `&name=${encodeURIComponent(searchQuery)}`;
+  }
+  // const page = `?page=${pageNumber}`;
+  await fetch(`${baseUrl}/${charactersPath}/${query}`)
+    // await fetch(`${baseUrl}/${charactersPath}/${page}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -54,7 +58,7 @@ prevButton.addEventListener("click", (e) => {
 
   if (page > 1) {
     page--;
-    fetchCharacters(page);
+    fetchCharacters(page, searchQuery);
   }
 });
 // Trigger this function when the user click on "next" button.
@@ -63,7 +67,7 @@ nextButton.addEventListener("click", (e) => {
 
   if (page < maxPage) {
     page++;
-    fetchCharacters(page);
+    fetchCharacters(page, searchQuery);
   }
 });
 
@@ -75,16 +79,24 @@ function cleanContainer() {
 function checkDocument() {
   page <= 1 ? (prevButton.disabled = true) : (prevButton.disabled = false);
 }
-
-// Whhen the content is loaded, let validate in which page we are.
-document.addEventListener("DOMContentLoaded", checkDocument);
-
-fetchCharacters();
-
 searchBar.addEventListener("submit", function (event) {
   event.preventDefault();
-
-  //Getting the value of the input inside the searchbar.
-  const form = new FormData(event.target);
-  const formData = Object.fromEntries(form);
+  const formData = new FormData(event.target);
+  searchQuery = formData.get("query"); // Assuming the input field has the name 'search'
+  page = 1;
+  fetchCharacters(page, searchQuery);
 });
+document.addEventListener("DOMContentLoaded", () => {
+  fetchCharacters();
+  checkDocument();
+});
+
+// // Whhen the content is loaded, let validate in which page we are.
+// document.addEventListener("DOMContentLoaded", checkDocument);
+
+// fetchCharacters();
+
+//   //Getting the value of the input inside the searchbar.
+//   const form = new FormData(event.target);
+//   const formData = Object.fromEntries(form);
+// });
