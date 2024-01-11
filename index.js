@@ -1,14 +1,16 @@
 import createCharacterCard from "./components/card/card.js";
 import errorComponent from "./components/error/error.js";
+import createButton from "./components/nav-button/nav-button.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
 );
+const navButtons = createButton();
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
+const prevButton = navButtons[0];
+const nextButton = navButtons[1];
 const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
@@ -99,14 +101,6 @@ searchBar.addEventListener("submit", function (event) {
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchCharacters();
+  navigation.append(prevButton);
+  navigation.append(nextButton);
 });
-
-// // Whhen the content is loaded, let validate in which page we are.
-// document.addEventListener("DOMContentLoaded", checkDocument);
-
-// fetchCharacters();
-
-//   //Getting the value of the input inside the searchbar.
-//   const form = new FormData(event.target);
-//   const formData = Object.fromEntries(form);
-// });
