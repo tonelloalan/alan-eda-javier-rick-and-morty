@@ -11,10 +11,10 @@ import {
 import { createPagination } from "./components/nav-pagination/nav-pagination.js";
 
 const mainElement = document.getElementById("mainElement");
+const navigation = document.querySelector('[data-js="navigation"]');
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = createSearchBar();
 const searchBar = createForm();
-const navigation = document.querySelector('[data-js="navigation"]');
 const prevButton = createPreviousButton();
 const nextButton = createNextButton();
 const pagination = createPagination();
