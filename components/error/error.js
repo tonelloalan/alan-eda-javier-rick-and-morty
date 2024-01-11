@@ -6,7 +6,7 @@ export default function errorComponent(error) {
         <h1 class="error__content">"WUBBA LUBBA DUB-DUB!"</h1>
         <img
         class="error__image"
-        src="../../images/error_image.png"
+        src="././images/error_image.png"
         width="400"
         />
     `;
