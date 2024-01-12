@@ -13,7 +13,7 @@ button:disabled {
   background-color: transparent;
   color: #666;
 }
-.hoverEffect:hover {
+.hover__effect:hover {
   background-color: rgb(7, 159, 159);
   color: white;
 }

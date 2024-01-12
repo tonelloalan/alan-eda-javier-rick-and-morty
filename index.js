@@ -101,17 +101,17 @@ function checkDocument() {
   navigation.style.display = "grid";
   if (page <= 1) {
     prevButton.disabled = true;
-    prevButton.classList.remove("hoverEffect");
+    prevButton.classList.remove("hover__effect");
   } else {
     prevButton.disabled = false;
-    prevButton.classList.add("hoverEffect");
+    prevButton.classList.add("hover__effect");
   }
   if (page < maxPage) {
     nextButton.disabled = false;
-    nextButton.classList.add("hoverEffect");
+    nextButton.classList.add("hover__effect");
   } else {
     nextButton.disabled = true;
-    nextButton.classList.remove("hoverEffect");
+    nextButton.classList.remove("hover__effect");
   }
 }
 
