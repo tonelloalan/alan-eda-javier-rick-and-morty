@@ -41,3 +41,8 @@ main {
 .title__image {
   padding: 20px;
 }
+
+.title__button {
+  background-color: inherit;
+  border-style: none;
+}
