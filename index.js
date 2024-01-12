@@ -73,8 +73,7 @@ async function fetchCharacters(pageNumber = 1, searchQuery = "") {
     });
 }
 // Event listener for "previous" button click
-prevButton.addEventListener("click", (e) => {
-  e.preventDefault();
+prevButton.addEventListener("click", () => {
   // Decrement page and fetch characters for the new page
   if (page > 1) {
     page--;
@@ -82,8 +81,7 @@ prevButton.addEventListener("click", (e) => {
   }
 });
 // Event listener for "next" button click
-nextButton.addEventListener("click", (e) => {
-  e.preventDefault();
+nextButton.addEventListener("click", () => {
   // Increment page and fetch characters for the new page
   if (page < maxPage) {
     page++;
@@ -98,9 +96,23 @@ function cleanContainer() {
 // Function to check the document and update navigation display
 function checkDocument() {
   // Display navigation grid and update button states based on current page
+
+  //TO DO: Refactor those validations!!!
   navigation.style.display = "grid";
-  page <= 1 ? (prevButton.disabled = true) : (prevButton.disabled = false);
-  page < maxPage ? (nextButton.disabled = false) : (nextButton.disabled = true);
+  if (page <= 1) {
+    prevButton.disabled = true;
+    prevButton.classList.remove("hoverEffect");
+  } else {
+    prevButton.disabled = false;
+    prevButton.classList.add("hoverEffect");
+  }
+  if (page < maxPage) {
+    nextButton.disabled = false;
+    nextButton.classList.add("hoverEffect");
+  } else {
+    nextButton.disabled = true;
+    nextButton.classList.remove("hoverEffect");
+  }
 }
 
 // Event listener for search form submission

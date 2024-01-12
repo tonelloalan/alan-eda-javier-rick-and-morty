@@ -9,14 +9,13 @@
   transition: background-color ease 0.3s;
 }
 
-.button:hover {
-  background-color: rgb(7, 159, 159);
-  color: white;
-}
-
 button:disabled {
   background-color: transparent;
   color: #666;
+}
+.hoverEffect:hover {
+  background-color: rgb(7, 159, 159);
+  color: white;
 }
 
 @font-face {
